@@ -11,6 +11,7 @@
 
 @interface ViewController : UIViewController
 
++ (NSString *)parseProductCodeFromURL:(NSString *)urlString pattern:(NSString *)pattern;
 
 @end
 

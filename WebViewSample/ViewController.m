@@ -8,7 +8,9 @@
 
 #import "ViewController.h"
 
-#define INITIAL_URL @"https://amazon.co.jp/"
+//#define INITIAL_URL @"https://gocart.jp/"
+#define INITIAL_URL @"https://gocart.jp/ap/item/i/A0GC00007VBC?colvar=UAL"
+#define PATTERN     @"https://gocart.jp/ap/item/i/(.*)\\?.*"
 
 @interface ViewController () <WKNavigationDelegate>
 
@@ -81,7 +83,11 @@
 }
 
 - (IBAction)decideBtnTapped:(id)sender {
-    NSString *msg = [NSString stringWithFormat:@"URL: %@", self.webView.URL];
+    // URLから商品コードを抽出
+    NSString *urlString = [self.webView.URL absoluteString];
+    NSString *productCode = [self.class parseProductCodeFromURL:urlString pattern:PATTERN];
+    
+    NSString *msg = [NSString stringWithFormat:@"URL: %@\nPRODUCT_CODE: %@", self.webView.URL, productCode];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"OK"
                                                            style:UIAlertActionStyleCancel
@@ -91,6 +97,25 @@
                                                           preferredStyle:UIAlertControllerStyleAlert];
     [controller addAction:cancelAction];
     [self presentViewController:controller animated:YES completion:nil];
+}
+
+/**
+ * URL内で正規表現のパターン(1)に一致する部分の文字列を取得する。
+ * 複数に一致した場合、最初に一致した箇所を取得する
+ */
++ (NSString *)parseProductCodeFromURL:(NSString *)urlString pattern:(NSString *)pattern
+{
+    // URLから商品コードを抽出
+    NSRegularExpression* regex = [NSRegularExpression regularExpressionWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:nil];
+    NSArray *matches = [regex matchesInString:urlString
+                                      options:NSMatchingReportProgress
+                                        range:NSMakeRange(0, [urlString length])];
+    if (matches.count != 0) {
+        NSTextCheckingResult *match = (NSTextCheckingResult*)[matches objectAtIndex:0];
+        return [urlString substringWithRange:[match rangeAtIndex:1]];
+    } else {
+        return @"";
+    }
 }
 
 @end
