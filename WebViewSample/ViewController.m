@@ -10,7 +10,7 @@
 
 //#define INITIAL_URL @"https://gocart.jp/"
 #define INITIAL_URL @"https://gocart.jp/ap/item/i/A0GC00007VBC?colvar=UAL"
-#define PATTERN     @"https://gocart.jp/ap/item/i/(.*)\\?.*"
+#define PATTERN     @"/i/([a-zA-Z0-9]*)"
 
 @interface ViewController () <WKNavigationDelegate>
 
