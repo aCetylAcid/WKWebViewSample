@@ -26,6 +26,21 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Scv-Mr-orq"/>
+                                    <barButtonItem title="Back" id="xZs-0p-Ze7">
+                                        <connections>
+                                            <action selector="backBtnTapped:" destination="BYZ-38-t0r" id="uPe-Vh-tQd"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Forward" id="8WK-bO-T1S">
+                                        <connections>
+                                            <action selector="forwardBtnTapped:" destination="BYZ-38-t0r" id="F6x-Ab-qeR"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Reload" id="XXd-AN-VVh">
+                                        <connections>
+                                            <action selector="reloadBtnTapped:" destination="BYZ-38-t0r" id="TEQ-5c-gVf"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem title="DECIDE" id="ruh-aS-7DS">
                                         <connections>
                                             <action selector="decideBtnTapped:" destination="BYZ-38-t0r" id="e15-Tn-uWo"/>
